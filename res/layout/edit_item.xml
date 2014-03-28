@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical" >
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/edit_name"
+              android:paddingLeft="10dip"
+              android:paddingRight="10dip"
+              android:paddingTop="10dip"
+              android:textSize="17dip"/>
+
+    <EditText
+        android:id="@+id/inputNameE"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true" />
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/edit_location"
+              android:paddingLeft="10dip"
+              android:paddingRight="10dip"
+              android:paddingTop="10dip"
+              android:textSize="17dip"/>
+
+    <EditText android:id="@+id/inputLocationE"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dip"
+              android:layout_marginBottom="15dip"
+              android:singleLine="true"
+             />
+     <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/edit_inumber"
+              android:paddingLeft="10dip"
+              android:paddingRight="10dip"
+              android:paddingTop="10dip"
+              android:textSize="17dip"/>
+
+    <EditText android:id="@+id/inputINumberE"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dip"
+              android:layout_marginBottom="15dip"
+              android:singleLine="true"
+              android:inputType="numberDecimal"/>
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/edit_description"
+              android:paddingLeft="10dip"
+              android:paddingRight="10dip"
+              android:paddingTop="10dip"
+              android:textSize="17dip"/>
+
+    <EditText android:id="@+id/inputDescE"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dip"
+              android:layout_marginBottom="15dip"
+              android:lines="4"
+              android:gravity="top"/>
+
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete" />
+
+        <Button
+            android:id="@+id/btnAddPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_photo_to_item" />
+
+         <Button
+             android:id="@+id/btnCancel"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/cancel" />
+
+    </LinearLayout>
+
+</LinearLayout>

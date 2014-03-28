@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Diploma</string>
+    <string name="btn_viewitem">Всі предмети</string>
+    <string name="btn_addnewitem">Додати новий предмет</string>
+     <string name="all_items_label">Список усіх предметів:</string>
+    <string name="edit_name">Назва</string>
+    <string name="edit_location">Розміщення</string>
+    <string name="edit_inumber">Інвентарний номер</string>
+    <string name="edit_description">Опис</string>
+  <string name="save">Зберегти</string>
+    <string name="delete">Видалити</string>
+      <string name="cancel">Відмінити</string>
+      <string name="new_item_label">Введіть інформацію про предмет:</string>
+      <string name="edit_item_label">Редагувати інформацію про предмет</string>
+      <string name="server">http://slaytmc.esy.es/</string>
+      <string name="add_photo_to_item">Фото</string>
+      <string name="btn_choose_img">Виберіть зображення</string>
+      <string name="btn_upload_img">Натисність щоб завантажити файл</string>
+     
+  
+</resources>
