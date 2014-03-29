@@ -43,6 +43,7 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 	private int serverResponseCode = 0;
 	private ProgressDialog dialog = null;
 	private String id, imgNameForUpload;
+	final private String upLoadServerUriScript = "http://slaytmc.esy.es/upload_to_server.php";
 	private String upLoadServerUri = "http://slaytmc.esy.es/upload_to_server.php";
 	JSONParser jsonParser = new JSONParser();
 	private static String url_add_photo = "http://slaytmc.esy.es/add_photo.php";
@@ -50,7 +51,7 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 	private static final String TAG_SUCCESS = "success";
 	private String imagepath = null;
 	DateFormat dateFormat = new SimpleDateFormat("HHmmss_ddMMyy");
-	Calendar cal = Calendar.getInstance();
+	Calendar cal;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 			startActivityForResult(
 					Intent.createChooser(intent, "Complete action using"), 1);
 		} else if (arg0 == uploadButton) {
-
+			cal=Calendar.getInstance();
 			imgNameForUpload = dateFormat.format(cal.getTime()).toString();
 			new AddNewPhoto().execute();
 			dialog = ProgressDialog.show(UploadPhotoActivity.this, "",
@@ -153,11 +154,15 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 			return 0;
 
 		} else {
+			
 			try {
 
 				FileInputStream fileInputStream = new FileInputStream(
 						sourceFile);
+			
+					
 				URL url = new URL(upLoadServerUri);
+				
 
 				conn = (HttpURLConnection) url.openConnection();
 				conn.setDoInput(true);
@@ -271,8 +276,8 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("itemid", id));
 			params.add(new BasicNameValuePair("photoaddr", imgNameForUpload));
-			params.add(new BasicNameValuePair("filepath", imagepath));
-
+			upLoadServerUri=upLoadServerUriScript;
+			upLoadServerUri=(upLoadServerUri+"?photoname="+imgNameForUpload+".jpg").toString();
 			JSONObject json = jsonParser.makeHttpRequest(url_add_photo, "POST",
 					params);
 
