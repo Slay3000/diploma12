@@ -5,10 +5,10 @@ $response = array();
 if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['location']) && isset($_POST['inumber']) && isset($_POST['description'])) {
  
     $id = $_POST['id'];
-    $name = $_POST['name'];
-    $location = $_POST['location'];
-	 $inumber = $_POST['inumber'];
-    $description = $_POST['description'];
+    $name = urldecode($_POST['name']);
+    $location = urldecode($_POST['location']);
+	 $inumber = urldecode($_POST['inumber']);
+    $description = urldecode($_POST['description']);
  
     require 'db_connect.php';
  

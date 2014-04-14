@@ -30,6 +30,22 @@
                 android:name=".UploadPhotoActivity"
                 android:label="@string/edit_item_label" >
         </activity>
+         <activity
+                android:name=".ShowItemActivity"
+                android:label="@string/edit_item_label" >
+        </activity>
+                 <activity
+                android:name=".AllCategoriesActivity"
+                android:label="Категорії:" >
+        </activity>
+         
+                 <activity
+                android:name=".NewCategoryActivity"
+                android:label="Категорії:" >
+        </activity>
+        
+         
+    
     </application>
 
     <!--  Internet Permissions -->

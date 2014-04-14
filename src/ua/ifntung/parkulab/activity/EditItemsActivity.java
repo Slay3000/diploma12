@@ -1,5 +1,7 @@
 package ua.ifntung.parkulab.activity;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,7 +180,16 @@ public class EditItemsActivity extends Activity {
 
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair(TAG_ID, id));
-			params.add(new BasicNameValuePair(TAG_NAME, name));
+		
+				try {
+					params.add(new BasicNameValuePair(TAG_NAME, URLEncoder.encode(name, "UTF-8")));
+					params.add(new BasicNameValuePair(TAG_LOCATION,URLEncoder.encode(location, "UTF-8")));
+					params.add(new BasicNameValuePair(TAG_INUMBER, URLEncoder.encode(inumber, "UTF-8")));
+					params.add(new BasicNameValuePair(TAG_DESCRIPTION, URLEncoder.encode(description, "UTF-8")));
+				} catch (UnsupportedEncodingException e1) {
+					e1.printStackTrace();
+				}
+		
 			params.add(new BasicNameValuePair(TAG_LOCATION, location));
 			params.add(new BasicNameValuePair(TAG_INUMBER, inumber));
 			params.add(new BasicNameValuePair(TAG_DESCRIPTION, description));

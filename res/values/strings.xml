@@ -18,6 +18,10 @@
       <string name="add_photo_to_item">Фото</string>
       <string name="btn_choose_img">Виберіть зображення</string>
       <string name="btn_upload_img">Натисність щоб завантажити файл</string>
+      <string name="show_img">Показати зображення</string>
+      <string name="description">sd</string>
+      <string name="category_name_label">Назва категорії</string>
+      <string name="dialog_title">Ви дійсно хочете видалити категорію?</string>
      
   
 </resources>
