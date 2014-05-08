@@ -1,76 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical" >
 
-   
 
-    <TextView android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:text="@string/edit_name"
-              android:paddingLeft="10dip"
-              android:paddingRight="10dip"
-              android:paddingTop="10dip"
-              android:textSize="17dip"/>
+    <ScrollView
+        android:id="@+id/scrollView1" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <EditText android:id="@+id/inputName"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="5dip"
-              android:layout_marginBottom="15dip"
-              android:singleLine="true"/>
+   <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >  
 
-    <TextView android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:text="@string/edit_location"
-              android:paddingLeft="10dip"
-              android:paddingRight="10dip"
-              android:paddingTop="10dip"
-              android:textSize="17dip"/>
 
-    <EditText android:id="@+id/inputLocation"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="5dip"
-              android:layout_marginBottom="15dip"
-              android:singleLine="true"
-              />
-     <TextView android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:text="@string/edit_inumber"
-              android:paddingLeft="10dip"
-              android:paddingRight="10dip"
-              android:paddingTop="10dip"
-              android:textSize="17dip"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/edit_name"
+        android:textSize="17dip" />
 
-    <EditText android:id="@+id/inputINumber"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="5dip"
-              android:layout_marginBottom="15dip"
-              android:singleLine="true"
-              android:inputType="numberDecimal"/>
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true" />
 
-    <TextView android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:text="@string/edit_description"
-              android:paddingLeft="10dip"
-              android:paddingRight="10dip"
-              android:paddingTop="10dip"
-              android:textSize="17dip"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/category_name"
+        android:textSize="17dip" />
 
-    <EditText android:id="@+id/inputDesc"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="5dip"
-              android:layout_marginBottom="15dip"
-              android:lines="4"
-              android:gravity="top"/>
+   <Spinner
+        android:id="@+id/inputCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/spinner_prompt" />
 
-    <Button android:id="@+id/btnCreateItem"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_addnewitem"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/edit_location"
+        android:textSize="17dip" />
+
+    <EditText
+        android:id="@+id/inputLocation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/edit_inumber"
+        android:textSize="17dip" />
+
+    <EditText
+        android:id="@+id/inputINumber"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:inputType="numberDecimal"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/edit_description"
+        android:textSize="17dip" />
+
+    <EditText
+        android:id="@+id/inputDesc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:gravity="top"
+        android:lines="4" />
+
+    <Button
+        android:id="@+id/btnCreateItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_addnewitem" />
+  
 
 </LinearLayout>
+    </ScrollView>

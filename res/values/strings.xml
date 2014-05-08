@@ -22,6 +22,8 @@
       <string name="description">sd</string>
       <string name="category_name_label">Назва категорії</string>
       <string name="dialog_title">Ви дійсно хочете видалити категорію?</string>
+      <string name="category_name">Категорія</string>
+      <string name="spinner_prompt">Виберіть категорію</string>
      
   
 </resources>
