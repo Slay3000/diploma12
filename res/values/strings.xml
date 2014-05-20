@@ -24,6 +24,12 @@
       <string name="dialog_title">Ви дійсно хочете видалити категорію?</string>
       <string name="category_name">Категорія</string>
       <string name="spinner_prompt">Виберіть категорію</string>
+      <string name="sometext">text</string>
+      <string name="item_info">Інформація про предмет</string>
+      <string name="img_server">http://slaytmc.esy.es/img/</string>
+      <string name="scanning">Скануємо...</string>
+      <string name="get_item_info_btn">Отримати результат</string>
+      <string name="scan_code_btn">Сканувати код</string>
      
   
 </resources>

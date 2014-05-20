@@ -4,7 +4,9 @@
           android:versionCode="1"
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8"/>
+     
     <application android:label="@string/app_name">
+        
         <activity android:name=".MainScreenActivity"
                   android:label="@string/app_name">
             <intent-filter>
@@ -30,10 +32,7 @@
                 android:name=".UploadPhotoActivity"
                 android:label="@string/edit_item_label" >
         </activity>
-         <activity
-                android:name=".ShowItemActivity"
-                android:label="@string/edit_item_label" >
-        </activity>
+
                  <activity
                 android:name=".AllCategoriesActivity"
                 android:label="Категорії:" >
@@ -43,11 +42,20 @@
                 android:name=".NewCategoryActivity"
                 android:label="Категорії:" >
         </activity>
-        
+              <activity
+                android:name=".GetItemByQR"
+                android:label="Отримати інформацію про предмет:" >
+        </activity>
+  <activity
+                android:name=".ShowItemActivity"
+                android:label="@string/item_info" >
+        </activity>
+              
          
     
     </application>
+   <uses-permission android:name="android.permission.INTERNET" />
+       <uses-permission android:name="android.permission.CAMERA" />
+  
 
-    <!--  Internet Permissions -->
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest> 

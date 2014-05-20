@@ -69,8 +69,6 @@ public class NewCategoryActivity extends Activity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("catname", catName));
            
-           
-
             JSONObject json = jsonParser.makeHttpRequest(url_create_category, "POST", params);
 
             Log.d("Створюємо відповідь ", json.toString());

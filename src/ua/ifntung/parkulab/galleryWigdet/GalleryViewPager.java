@@ -26,7 +26,7 @@ import android.view.MotionEvent;
 
 
 /**
- This class implements method to help <b>TouchImageView</b> fling, draggin and scaling.
+ This class implements method to help <blist>TouchImageView</blist> fling, draggin and scaling.
  */
 public class GalleryViewPager extends ViewPager {
     PointF last;

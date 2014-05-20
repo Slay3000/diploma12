@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- Class wraps URLs to adapter, then it instantiates <b>UrlTouchImageView</b> objects to paging up through them.
+ Class wraps URLs to adapter, then it instantiates <blist>UrlTouchImageView</blist> objects to paging up through them.
  */
 public class BasePagerAdapter extends PagerAdapter {
 
