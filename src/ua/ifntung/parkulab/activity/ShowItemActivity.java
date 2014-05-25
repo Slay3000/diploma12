@@ -28,7 +28,7 @@ public class ShowItemActivity extends Activity {
 	private static String url_get_item = "http://slaytmc.esy.es/get_item_by_qr.php";
 	private static String url_get_img = "http://slaytmc.esy.es/get_img.php";
 	ProgressDialog pDialog;
-	private String id;
+	String id;
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_ITEM = "item";
 	private static final String TAG_IMG = "img";
@@ -53,7 +53,7 @@ public class ShowItemActivity extends Activity {
 		qrcode=getIntent().getExtras().getString("qrcode");
 		
 new GetItemInfo().execute();
-new GetImg().execute();
+
 
 
 	}
@@ -72,7 +72,7 @@ new GetImg().execute();
 
 			try {
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
-//	params.add(new BasicNameValuePair("itemid", id));
+	params.add(new BasicNameValuePair("id",id));
 				JSONObject json = jsonParser.makeHttpRequest(url_get_img,
 						"POST", params);
 
@@ -103,6 +103,7 @@ new GetImg().execute();
 	//		pDialog.dismiss();
 		 runOnUiThread(new Runnable() {
             public void run() {
+            	
         		if (images.isEmpty())
         		images.add(getString(R.string.img_server)+"no_img.jpg");
         		
@@ -116,6 +117,7 @@ new GetImg().execute();
 	 }); 
 			
 		}
+		
 
 	}
 
@@ -156,7 +158,7 @@ new GetImg().execute();
 							inumber = (TextView) findViewById(R.id.showINumber);
 							description = (TextView) findViewById(R.id.showDesc);
 							id = res.getString(TAG_ID);
-							name.setText(res.getString(TAG_NAME));
+							name.setText(res.getString(TAG_NAME)+id);
 							location.setText(res.getString(TAG_LOCATION));
 							category.setText(res.getString(TAG_CATEGORY));
 							inumber.setText(res.getString(TAG_INUMBER));
@@ -173,7 +175,7 @@ new GetImg().execute();
 
 		protected void onPostExecute(String file_url) {
 			pDialog.dismiss();
-
+			new GetImg().execute();
 		}
 
 	}
