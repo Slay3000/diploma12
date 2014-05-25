@@ -44,7 +44,7 @@ public class EditItemsActivity extends Activity {
 	private static String url_all_categories = "http://slaytmc.esy.es/get_all_categories.php";
 	private static final String url_update_item = "http://slaytmc.esy.es/update_item.php";
 
-	private static final String url_delete_item = "http://slaytmc.esy.es/delete_item.php";
+	
 
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_ITEM = "item";
@@ -101,13 +101,7 @@ catList.add(TAG_CATEGORY_NAME);
 			}
 		});
 
-		btnDelete.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View arg0) {
-				new DeleteItem().execute();
-			}
-		});
 
 		btnAddPhoto.setOnClickListener(new View.OnClickListener() {
 
@@ -244,6 +238,7 @@ catList.add(TAG_CATEGORY_NAME);
 					Intent i = getIntent();
 					setResult(100, i);
 					finish();
+					
 				} else {
 				}
 			} catch (JSONException e) {
@@ -258,48 +253,7 @@ catList.add(TAG_CATEGORY_NAME);
 		}
 	}
 
-	class DeleteItem extends AsyncTask<String, String, String> {
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			pDialog = new ProgressDialog(EditItemsActivity.this);
-			pDialog.setMessage("Видаляємо предмет...");
-			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(true);
-			pDialog.show();
-		}
-
-		protected String doInBackground(String[] args) {
-
-			int success;
-			try {
-				List<NameValuePair> params = new ArrayList<NameValuePair>();
-				params.add(new BasicNameValuePair("id", id));
-
-				JSONObject json = jsonParser.makeHttpRequest(url_delete_item,
-						"POST", params);
-
-				Log.d("Видаляємо предмет", json.toString());
-
-				success = json.getInt(TAG_SUCCESS);
-				if (success == 1) {
-					Intent i = getIntent();
-					setResult(100, i);
-					finish();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-
-		protected void onPostExecute(String file_url) {
-			pDialog.dismiss();
-
-		}
-
-	}
+	
 
 	class LoadAllCategories extends
 			AsyncTask<String, String, ArrayList<String>> {

@@ -16,6 +16,7 @@
         </activity>
         <activity
                 android:name=".AllItemsActivity"
+                android:windowSoftInputMode="stateHidden" 
                 android:label="@string/all_items_label" >
         </activity>
 
@@ -50,12 +51,16 @@
                 android:name=".ShowItemActivity"
                 android:label="@string/item_info" >
         </activity>
+          <activity
+                android:name=".SettingsActivity"
+                android:label="ss" >
+        </activity>
               
          
     
     </application>
    <uses-permission android:name="android.permission.INTERNET" />
        <uses-permission android:name="android.permission.CAMERA" />
-  
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest> 

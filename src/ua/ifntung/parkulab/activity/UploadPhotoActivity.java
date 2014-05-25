@@ -111,7 +111,7 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 			imagepath = getPath(selectedImageUri);
 			Bitmap bitmap = BitmapFactory.decodeFile(imagepath);
 			imageview.setImageBitmap(bitmap);
-			messageText.setText("Uploading file path:" + imagepath);
+			
 
 		}
 	}

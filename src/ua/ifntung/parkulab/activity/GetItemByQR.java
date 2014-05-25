@@ -10,10 +10,12 @@ import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ua.ifntung.parkulab.activity.ShowItemActivity.GetImg;
 import ua.ifntung.parkulab.camera.CameraPreview;
 import ua.ifntung.parkulab.parser.JSONParser;
 import android.app.Activity;
@@ -66,7 +68,7 @@ ArrayList<String> blist=new ArrayList<String>();
 
 		setContentView(R.layout.get_item_by_qr);
 
-        
+
     	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		autoFocusHandler = new Handler();
@@ -90,7 +92,7 @@ ArrayList<String> blist=new ArrayList<String>();
 		 dlgAlert  = new AlertDialog.Builder(this);
 
 		 
-      //  dlgAlert.setMessage("Невірний QR код");
+   
         dlgAlert.setTitle("Помилка");
         dlgAlert.setPositiveButton("OK", null);
         dlgAlert.setCancelable(true);
@@ -220,4 +222,5 @@ ArrayList<String> blist=new ArrayList<String>();
 		  }
 		
 	}
+
 }

@@ -3,7 +3,11 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical">
-
+  <EditText android:id="@+id/inputSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_items"
+        android:inputType="textVisiblePassword"/>
     <ListView
             android:id="@android:id/list"
             android:layout_width="fill_parent"

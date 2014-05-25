@@ -30,6 +30,14 @@
       <string name="scanning">Скануємо...</string>
       <string name="get_item_info_btn">Отримати результат</string>
       <string name="scan_code_btn">Сканувати код</string>
+       <string name="edit_item_menu">Редагувати предмет</string>
+      <string name="generate_qr_menu">Згенерувати QR код</string>
+          <string name="delete_item_menu">Видалити предмет</string>
+      <string name="add_photo_menu">Додати зображення</string>
+      <string name="search_items">Пошук предметів...</string>
+      <string name="clear_btn">Очистити</string>
+      <string name="password">Пароль</string>
+      <string name="login">Логін</string>
      
   
 </resources>
