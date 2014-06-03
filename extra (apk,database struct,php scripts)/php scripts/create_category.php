@@ -1,18 +1,16 @@
 <?php
 $response = array();
  
-if (isset($_POST['name']) && isset($_POST['location']) && isset($_POST['inumber']) && isset($_POST['description']) &&isset($_POST['catname'])) {
+if (isset($_POST['catname'])) {
  
-    $name = urldecode($_POST['name']);
-    $location = urldecode($_POST['location']);
-    $inumber = urldecode($_POST['inumber']);
-	 $description = urldecode($_POST['description']);
-	 $category = urldecode($_POST['catname']);
+    $catname = $_POST['catname'];
+  
+
     require 'db_connect.php';
  
     $db = new DB_CONNECT();
  
-    $result = mysql_query("INSERT INTO items(name, location, inumber, description,catname) VALUES('$name', '$location', '$inumber', '$description','$category')");
+    $result = mysql_query("INSERT INTO category(catname) VALUES('$catname')");
  
     if ($result) {
         $response["success"] = 1;

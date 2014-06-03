@@ -11,12 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class SettingsActivity extends Activity implements OnClickListener{
-EditText loginEdit,passwordEdit;
+EditText loginEdit,passwordEdit,serverEdit;
 Button save,clear;
 SharedPreferences settings;
 public static final String APP_PREFERENCES = "logpass"; 
 public static String TAG_LOGIN="login";
 public static String TAG_PASSWORD="password";
+public static String TAG_SERVER="server";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -24,6 +25,7 @@ public static String TAG_PASSWORD="password";
 		setContentView(R.layout.settings);
 		loginEdit=(EditText)findViewById(R.id.inputLogin);
 		passwordEdit=(EditText)findViewById(R.id.inputPassword);
+		serverEdit=(EditText)findViewById(R.id.inputServer);
 		save=(Button)findViewById(R.id.btnSaveS);
 		clear=(Button)findViewById(R.id.btnClear);
 		save.setOnClickListener(this);
@@ -35,6 +37,10 @@ public static String TAG_PASSWORD="password";
 		if(settings.contains(TAG_PASSWORD)) {
 			passwordEdit.setText(settings.getString(TAG_PASSWORD, ""));
 		}
+		if(settings.contains(TAG_SERVER)) {
+			serverEdit.setText(settings.getString(TAG_SERVER, ""));
+		}
+		
 
 	}
 	@Override
@@ -43,13 +49,15 @@ public static String TAG_PASSWORD="password";
 	case R.id.btnSaveS:
 		String log=loginEdit.getText().toString();
 		String pass=passwordEdit.getText().toString();
+		String serv=serverEdit.getText().toString();
 	SharedPreferences.Editor editor=settings.edit();
-	
+	editor.putString(TAG_SERVER,serv);
 	editor.putString(TAG_LOGIN,log);
 	editor.putString(TAG_PASSWORD, pass);
 	editor.commit();
 	InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 	 inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
 	Toast.makeText(getApplicationContext(), "«бережено", Toast.LENGTH_SHORT).show();
 		break;
 	
@@ -64,4 +72,7 @@ public static String TAG_PASSWORD="password";
 
 	}
 
-}}
+}
+	public String getSetting(String value){
+	return settings.getString(value, "");
+	}}

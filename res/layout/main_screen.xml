@@ -5,31 +5,12 @@
               android:orientation="vertical"
               android:gravity="center_horizontal">
 
-    <Button android:id="@+id/btnViewItems"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_viewitem"
-            android:layout_marginTop="25dip"/>
-
-    <Button android:id="@+id/btnCreateItem"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_addnewitem"
-            android:layout_marginTop="25dip"/>
-     <Button android:id="@+id/btnShowImage"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/show_img"
-            android:layout_marginTop="25dip"/>
-       <Button android:id="@+id/btnCategory"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Categories"
-            android:layout_marginTop="25dip"/>
-        <Button android:id="@+id/btnQR"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Categories"
-            android:layout_marginTop="25dip"/>
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="@string/hello"
+        android:textAppearance="?android:attr/textAppearanceLarge" 
+        android:gravity="center"/>
 
 </LinearLayout>

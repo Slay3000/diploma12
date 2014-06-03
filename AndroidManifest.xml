@@ -5,8 +5,8 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8"/>
      
-    <application android:label="@string/app_name">
-        
+    <application android:label="@string/app_name" android:theme="@style/MyAppTheme">>
+    
         <activity android:name=".MainScreenActivity"
                   android:label="@string/app_name">
             <intent-filter>
@@ -31,7 +31,7 @@
         </activity>
         <activity
                 android:name=".UploadPhotoActivity"
-                android:label="@string/edit_item_label" >
+                android:label="@string/upload_image_label" >
         </activity>
 
                  <activity
@@ -44,7 +44,7 @@
                 android:label="Категорії:" >
         </activity>
               <activity
-                android:name=".GetItemByQR"
+                android:name=".GetItemByQRActivity"
                 android:label="Отримати інформацію про предмет:" >
         </activity>
   <activity
@@ -53,12 +53,18 @@
         </activity>
           <activity
                 android:name=".SettingsActivity"
-                android:label="ss" >
+                android:label="@string/settings_label" >
         </activity>
-              
-         
-    
-    </application>
+                    <activity
+                android:name=".ImageManageActivity"
+                android:label="@string/image_manage_label" >
+        </activity>
+                         <activity
+                android:name=".AdminOptionsActivity"
+                android:label="@string/admin_func_label" >
+        </activity>
+          
+             </application>
    <uses-permission android:name="android.permission.INTERNET" />
        <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

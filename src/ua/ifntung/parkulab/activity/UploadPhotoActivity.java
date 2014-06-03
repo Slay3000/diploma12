@@ -43,10 +43,11 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 	private int serverResponseCode = 0;
 	private ProgressDialog dialog = null;
 	private String id, imgNameForUpload;
-	final private String upLoadServerUriScript = "http://slaytmc.esy.es/upload_to_server.php";
-	private String upLoadServerUri = "http://slaytmc.esy.es/upload_to_server.php";
+	 private String upLoadServerUriScript = "upload_to_server.php";
+	private String upLoadServerUri = "upload_to_server.php";
 	JSONParser jsonParser = new JSONParser();
-	private static String url_add_photo = "http://slaytmc.esy.es/add_photo.php";
+	private static String url_add_photo = "add_photo.php";
+String server;
 
 	private static final String TAG_SUCCESS = "success";
 	private String imagepath = null;
@@ -58,7 +59,10 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.upload_img);
-
+		 server=getIntent().getStringExtra("server");
+		 url_add_photo=server+url_add_photo;
+		 upLoadServerUri=server+upLoadServerUri;
+		 upLoadServerUriScript=server+upLoadServerUriScript;
 		uploadButton = (Button) findViewById(R.id.btnUpload);
 		messageText = (TextView) findViewById(R.id.messageText);
 		btnselectpic = (Button) findViewById(R.id.button_selectpic);
@@ -276,7 +280,7 @@ public class UploadPhotoActivity extends Activity implements OnClickListener {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("itemid", id));
 			params.add(new BasicNameValuePair("photoaddr", imgNameForUpload));
-			upLoadServerUri=upLoadServerUriScript;
+		upLoadServerUri=upLoadServerUriScript;
 			upLoadServerUri=(upLoadServerUri+"?photoname="+imgNameForUpload+".jpg").toString();
 			JSONObject json = jsonParser.makeHttpRequest(url_add_photo, "POST",
 					params);

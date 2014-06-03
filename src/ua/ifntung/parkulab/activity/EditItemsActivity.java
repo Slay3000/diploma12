@@ -32,7 +32,7 @@ public class EditItemsActivity extends Activity {
 
 	EditText txtName, txtLocation, txtDesc, txtINumber;
 	Spinner txtCategory;
-	Button btnSave, btnDelete, btnAddPhoto, btnCancel;
+	Button btnSave;
 
 	String id;
 
@@ -40,10 +40,10 @@ public class EditItemsActivity extends Activity {
 
 	JSONParser jsonParser = new JSONParser();
 
-	private static final String url_item_detials = "http://slaytmc.esy.es/get_item_details.php";
-	private static String url_all_categories = "http://slaytmc.esy.es/get_all_categories.php";
-	private static final String url_update_item = "http://slaytmc.esy.es/update_item.php";
-
+	private static final String url_item_detials = "get_item_details.php";
+	private static String url_all_categories = "get_all_categories.php";
+	private static final String url_update_item = "update_item.php";
+String server;
 	
 
 	private static final String TAG_SUCCESS = "success";
@@ -62,11 +62,9 @@ public class EditItemsActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_item);
-
+server=getIntent().getStringExtra("server");
 		btnSave = (Button) findViewById(R.id.btnSave);
-		btnDelete = (Button) findViewById(R.id.btnDelete);
-		btnCancel = (Button) findViewById(R.id.btnCancel);
-		btnAddPhoto = (Button) findViewById(R.id.btnAddPhoto);
+
 		txtCategory = (Spinner) findViewById(R.id.inputCategoryE);
 
 		Intent i = getIntent();
@@ -103,25 +101,8 @@ catList.add(TAG_CATEGORY_NAME);
 
 
 
-		btnAddPhoto.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(EditItemsActivity.this,
-						UploadPhotoActivity.class);
-				intent.putExtra(TAG_ID, id);
-				startActivity(intent);
-
-			}
-		});
-		btnCancel.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
-
+	
+	
 	}
 
 	class GetItemDetails extends AsyncTask<String, String, String> {
@@ -144,9 +125,8 @@ catList.add(TAG_CATEGORY_NAME);
 					try {
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						params.add(new BasicNameValuePair("id", id));
-
-						JSONObject json = jsonParser.makeHttpRequest(
-								url_item_detials, "GET", params);
+						JSONObject json = jsonParser.makeHttpRequest(server
+								+ url_item_detials, "GET", params);
 
 						Log.d("Деталі предмету ", json.toString());
 
@@ -228,7 +208,7 @@ catList.add(TAG_CATEGORY_NAME);
 				e1.printStackTrace();
 			}
 
-			JSONObject json = jsonParser.makeHttpRequest(url_update_item,
+			JSONObject json = jsonParser.makeHttpRequest(server+url_update_item,
 					"POST", params);
 
 			try {
@@ -260,7 +240,7 @@ catList.add(TAG_CATEGORY_NAME);
 
 		protected ArrayList<String> doInBackground(String... args) {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			JSONObject json = jsonParser.makeHttpRequest(url_all_categories,
+			JSONObject json = jsonParser.makeHttpRequest(server+url_all_categories,
 					"GET", params);
 
 			Log.d("Всі предмети: ", json.toString());

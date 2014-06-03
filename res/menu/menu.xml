@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/getByQrMenu"
+        android:title="@string/get_info_by_qr">
+    </item>
+        <item
+        android:id="@+id/settingsMenu"
+        android:title="@string/settings_label">
+    </item>
+    <item
+        android:id="@+id/adminMenu"
+        android:title="@string/admin_label">
+    </item>
+
+
+</menu>

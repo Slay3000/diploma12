@@ -9,11 +9,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -27,6 +23,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
@@ -59,11 +56,11 @@ public class AllItemsActivity extends ListActivity {
 String id;
 Bitmap pic;
 File file;
-    ArrayList<HashMap<String, String>> itemsList;
+    ArrayList<HashMap<String, String>> itemsList=new ArrayList<HashMap<String,String>>();
 
-    private static String url_all_items = "http://slaytmc.esy.es/get_all_items.php";
-    private static final String url_delete_item = "http://slaytmc.esy.es/delete_item.php";
-    private static String url_add_qr = "http://slaytmc.esy.es/add_item_qr.php";
+    private static String url_all_items = "get_all_items.php";
+    private static final String url_delete_item = "delete_item.php";
+    private static String url_add_qr = "add_item_qr.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_ITEMS = "items";
     private static final String TAG_ID = "id";
@@ -71,21 +68,18 @@ File file;
     public static final int POP_ED = 101; 
     public static final int POP_QR = 102;
     public static final int POP_PH = 103; 
-   
-    public static final int POP_DEL = 104; 
-
+    public static final int POP_IMG = 104; 
+     public static final int POP_DEL = 105; 
+String server;
     JSONArray items = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_items);
-        
+  	  server=getIntent().getStringExtra("server");
         	
-     
-       
-
-        itemsList = new ArrayList<HashMap<String, String>>();
+             itemsList = new ArrayList<HashMap<String, String>>();
 
         new LoadAllItems().execute();
 
@@ -143,7 +137,7 @@ view.showContextMenu();
 		 case POP_ED:
 			    Intent in = new Intent(getApplicationContext(), EditItemsActivity.class);
                 in.putExtra(TAG_ID, id);
-
+in.putExtra("server", server);
                 startActivityForResult(in, 100);
 			    break;
 		   case POP_QR:
@@ -152,12 +146,17 @@ view.showContextMenu();
 		    case POP_PH:
 		    	Intent intent = new Intent(AllItemsActivity.this,
 						UploadPhotoActivity.class);
-		    	
+		    	intent.putExtra("server", server);
 				intent.putExtra(TAG_ID, id);
 				startActivity(intent);
 			    break;
+		    case POP_IMG:
+		    	 Intent i = new Intent(getApplicationContext(), ImageManageActivity.class);
+	                i.putExtra(TAG_ID, id);
+	i.putExtra("server", server);
+	                startActivity(i);
+		    break; 
 		    case POP_DEL:
-		    
 			  new DeleteItem().execute();
 			    break;
 		    default:
@@ -178,6 +177,7 @@ view.showContextMenu();
 		menu.add(Menu.NONE, POP_ED, Menu.NONE, getString(R.string.edit_item_menu));
 		menu.add(Menu.NONE, POP_QR, Menu.NONE, getString(R.string.generate_qr_menu));
 		menu.add(Menu.NONE, POP_PH, Menu.NONE, getString(R.string.add_photo_menu));
+		menu.add(Menu.NONE, POP_IMG, Menu.NONE, getString(R.string.show_images));
 		menu.add(Menu.NONE, POP_DEL, Menu.NONE, getString(R.string.delete_item_menu));
 	
 	}
@@ -185,11 +185,12 @@ view.showContextMenu();
 
 
 	@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 100) {
             Intent intent = getIntent();
             finish();
+            intent.putExtra("server", server);
             startActivity(intent);
         }
 
@@ -210,7 +211,7 @@ view.showContextMenu();
 
         protected String doInBackground(String... args) {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            JSONObject json = jParser.makeHttpRequest(url_all_items, "GET", params);
+            JSONObject json = jParser.makeHttpRequest(server+url_all_items, "GET", params);
 
             Log.d("Всі предмети: ", json.toString());
 
@@ -234,6 +235,7 @@ map=new HashMap<String, String>();
                 } else {
                     Intent i = new Intent(getApplicationContext(),
                             NewItemActivity.class);
+                    i.putExtra("server", server);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 }
@@ -288,17 +290,15 @@ map=new HashMap<String, String>();
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("id", id));
 
-				JSONObject json = jParser.makeHttpRequest(url_delete_item,
+				JSONObject json = jParser.makeHttpRequest(server+url_delete_item,
 						"POST", params);
 
 				Log.d("Видаляємо предмет", json.toString());
 
 				success = json.getInt(TAG_SUCCESS);
-				if (success == 1) {
-					Intent i = getIntent();
-					setResult(100, i);
-					finish();
-				}
+				
+				
+								
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -307,6 +307,16 @@ map=new HashMap<String, String>();
 		}
 
 		protected void onPostExecute(String file_url) {
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					  Intent i = new Intent(AllItemsActivity.this, AllItemsActivity.class);
+						i.putExtra("server", server);
+						startActivity(i);
+						finish();
+				}
+			});
 			pDialog.dismiss();
 
 		}
@@ -339,7 +349,7 @@ map=new HashMap<String, String>();
 		
 				List<NameValuePair> param = new ArrayList<NameValuePair>();
 		    	param.add(new BasicNameValuePair(TAG_ID,id));
-		    	JSONObject json = jParser.makeHttpRequest(url_add_qr,
+		    	JSONObject json = jParser.makeHttpRequest(server+url_add_qr,
 						"POST", param);
 		    	Log.d("Створюємо відповідь ", json.toString());
 			 FileOutputStream out;
@@ -405,7 +415,6 @@ map=new HashMap<String, String>();
 	 
 		}
 
- 
 
  
 }

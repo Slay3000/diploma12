@@ -25,10 +25,10 @@ import android.widget.TextView;
 public class ShowItemActivity extends Activity {
 	String qrcode;
 	TextView name, location, category, inumber, description;
-	private static String url_get_item = "http://slaytmc.esy.es/get_item_by_qr.php";
-	private static String url_get_img = "http://slaytmc.esy.es/get_img.php";
+	private static String url_get_item = "get_item_by_qr.php";
+	private static String url_get_img = "get_img.php";
 	ProgressDialog pDialog;
-	String id;
+	String id, server;
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_ITEM = "item";
 	private static final String TAG_IMG = "img";
@@ -46,35 +46,36 @@ public class ShowItemActivity extends Activity {
 	private GalleryViewPager mViewPager;
 
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.show_item);
+		server = getIntent().getStringExtra("server");
 		name = (TextView) findViewById(R.id.showName);
-		qrcode=getIntent().getExtras().getString("qrcode");
-		
-new GetItemInfo().execute();
+		qrcode = getIntent().getExtras().getString("qrcode");
 
-
+		new GetItemInfo().execute();
 
 	}
 
 	class GetImg extends AsyncTask<String, String, String> {
 		@Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-       /*     pDialog = new ProgressDialog(ShowItemActivity.this);
-            pDialog.setMessage("Завантажуємо зображення...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();*/
-        }
+		protected void onPreExecute() {
+			super.onPreExecute();
+			
+			  pDialog = new ProgressDialog(ShowItemActivity.this);
+			 pDialog.setMessage("Завантажуємо зображення...");
+			  pDialog.setIndeterminate(false); pDialog.setCancelable(false);
+			  pDialog.show();
+			
+		}
+
 		protected String doInBackground(String... args) {
 
 			try {
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
-	params.add(new BasicNameValuePair("id",id));
-				JSONObject json = jsonParser.makeHttpRequest(url_get_img,
-						"POST", params);
+				params.add(new BasicNameValuePair("id", id));
+				JSONObject json = jsonParser.makeHttpRequest(server
+						+ url_get_img, "POST", params);
 
 				Log.d("Всі предмети: ", json.toString());
 
@@ -82,15 +83,15 @@ new GetItemInfo().execute();
 
 				if (success == 1) {
 					JSONArray img = json.getJSONArray(TAG_IMG);
-				
-					  for (int i = 0; i < img.length(); i++) {
-	                        JSONObject c = img.getJSONObject(i);
 
-					JSONObject res = img.getJSONObject(i);
-			images.add(getString(R.string.img_server)+res.getString(TAG_IADDR));
-					
+					for (int i = 0; i < img.length(); i++) {
+						JSONObject c = img.getJSONObject(i);
 
-					  }} else {
+						JSONObject res = img.getJSONObject(i);
+						images.add(server + "img/" + res.getString(TAG_IADDR));
+
+					}
+				} else {
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -100,29 +101,30 @@ new GetItemInfo().execute();
 		}
 
 		protected void onPostExecute(String file_url) {
-	//		pDialog.dismiss();
-		 runOnUiThread(new Runnable() {
-            public void run() {
-            	
-        		if (images.isEmpty())
-        		images.add(getString(R.string.img_server)+"no_img.jpg");
-        		
-            	UrlPagerAdapter pagerAdapter = new UrlPagerAdapter(ShowItemActivity.this, images);
-
-        		mViewPager = (GalleryViewPager) findViewById(R.id.viewer);
-        		mViewPager.setOffscreenPageLimit(3);
-        		mViewPager.setAdapter(pagerAdapter);
-
-            }
-	 }); 
 			
+			runOnUiThread(new Runnable() {
+				public void run() {
+
+					if (images.isEmpty())
+						images.add(server + "img/" + "no_img.jpg");
+
+					UrlPagerAdapter pagerAdapter = new UrlPagerAdapter(
+							ShowItemActivity.this, images);
+
+					mViewPager = (GalleryViewPager) findViewById(R.id.viewer);
+					mViewPager.setOffscreenPageLimit(3);
+					mViewPager.setAdapter(pagerAdapter);
+
+				}
+			});
+			pDialog.dismiss();
+
 		}
-		
 
 	}
 
 	class GetItemInfo extends AsyncTask<String, String, String> {
-		
+
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -140,8 +142,8 @@ new GetItemInfo().execute();
 					try {
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						params.add(new BasicNameValuePair("qrcode", qrcode));
-						JSONObject json = jsonParser.makeHttpRequest(
-								url_get_item, "POST", params);
+						JSONObject json = jsonParser.makeHttpRequest(server
+								+ url_get_item, "POST", params);
 
 						Log.d("Всі предмети: ", json.toString());
 
@@ -158,7 +160,7 @@ new GetItemInfo().execute();
 							inumber = (TextView) findViewById(R.id.showINumber);
 							description = (TextView) findViewById(R.id.showDesc);
 							id = res.getString(TAG_ID);
-							name.setText(res.getString(TAG_NAME)+id);
+							name.setText(res.getString(TAG_NAME));
 							location.setText(res.getString(TAG_LOCATION));
 							category.setText(res.getString(TAG_CATEGORY));
 							inumber.setText(res.getString(TAG_INUMBER));

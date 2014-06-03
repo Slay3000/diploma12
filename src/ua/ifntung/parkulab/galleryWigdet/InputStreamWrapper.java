@@ -1,4 +1,4 @@
-package ua.ifntung.parkulab.touchView;
+package ua.ifntung.parkulab.galleryWigdet;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

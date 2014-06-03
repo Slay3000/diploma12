@@ -1,5 +1,5 @@
- 
-package ua.ifntung.parkulab.touchView;
+
+package ua.ifntung.parkulab.galleryWigdet;
 
 import android.view.MotionEvent;
 

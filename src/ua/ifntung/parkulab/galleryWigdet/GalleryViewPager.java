@@ -17,7 +17,6 @@
  */
 package ua.ifntung.parkulab.galleryWigdet;
 
-import ua.ifntung.parkulab.touchView.TouchImageView;
 import android.content.Context;
 import android.graphics.PointF;
 import android.support.v4.view.ViewPager;

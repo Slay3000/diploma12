@@ -6,18 +6,16 @@ require 'db_connect.php';
  
 $db = new DB_CONNECT();
  
-$result = mysql_query("SELECT *FROM items") or die(mysql_error());
-
+$result = mysql_query("SELECT id,qrcode FROM items WHERE qrcode <>''") or die(mysql_error());
+ 
 if (mysql_num_rows($result) > 0) {
-    $response["items"] = array();
+    $response["codes"] = array();
  
     while ($row = mysql_fetch_array($result)) {
-        $product = array();
-        $product["id"] = $row["id"];
-        $product["name"] = $row["name"];
-  
- 
-        array_push($response["items"], $product);
+        $codes = array();
+		          $codes["qrcode"] = $row["qrcode"];
+   
+        array_push($response["codes"], $codes);
     }
     $response["success"] = 1;
  

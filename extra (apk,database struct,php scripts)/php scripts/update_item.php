@@ -2,19 +2,20 @@
  
 $response = array();
  
-if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['location']) && isset($_POST['inumber']) && isset($_POST['description'])) {
+if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['location']) && isset($_POST['inumber']) && isset($_POST['description'])&& isset($_POST['catname'])) {
  
     $id = $_POST['id'];
     $name = urldecode($_POST['name']);
     $location = urldecode($_POST['location']);
-	 $inumber = urldecode($_POST['inumber']);
-    $description = urldecode($_POST['description']);
+	 $inumber = $_POST['inumber'];
+    $description =urldecode( $_POST['description']);
+	$catname =urldecode( $_POST['catname']);
  
     require 'db_connect.php';
  
     $db = new DB_CONNECT();
  
-    $result = mysql_query("UPDATE items SET name = '$name', location = '$location', inumber = '$inumber',description = '$description' WHERE id = $id");
+    $result = mysql_query("UPDATE items SET name = '$name', location = '$location', inumber = '$inumber',description = '$description',catname = '$catname' WHERE id = $id");
  
     if ($result) {
         // successfully updated

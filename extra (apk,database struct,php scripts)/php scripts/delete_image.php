@@ -2,21 +2,17 @@
 
 $response = array();
  
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
+if (isset($_POST['photo_address'])) {
+    $paddress = $_POST['photo_address'];
  
     require 'db_connect.php';
  
     $db = new DB_CONNECT();
-   $deletefiles = mysql_query("SELECT * FROM photos where item_id= $id");
+  
  $path = 'img/';
-if (mysql_num_rows($deletefiles) > 0) {
-   
-    while ($row = mysql_fetch_array($deletefiles)) {
-      unlink($path . $row["photo_address"]);
-	}}
-    $deleteitem = mysql_query("DELETE FROM items WHERE id = $id");
-	$deletephotodb = mysql_query("DELETE FROM photos WHERE item_id = $id");
+     unlink($path . $paddress);
+	
+   $deletephotodb = mysql_query("DELETE FROM photos WHERE photo_address = $paddress");
 
     if (mysql_affected_rows() > 0) {
         $response["success"] = 1;

@@ -13,7 +13,7 @@ if (isset($_POST['itemid']) && isset($_POST['photoaddr']) ) {
  
     $db = new DB_CONNECT();
  
-    $result = mysql_query("INSERT INTO photos(item_id, photo_address) VALUES('$itemid', '$imgi ')");
+    $result = mysql_query("INSERT INTO photos(item_id, photo_address) VALUES('$itemid', '$imgi')");
  
     if ($result) {
         $response["success"] = 1;

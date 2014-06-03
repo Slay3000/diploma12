@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Diploma</string>
-    <string name="btn_viewitem">Всі предмети</string>
-    <string name="btn_addnewitem">Додати новий предмет</string>
+    <string name="app_name">Програма обліку ТМЦ</string>
+    <string name="all_items_btn">Всі предмети</string>
+    <string name="add_new_item">Додати новий предмет</string>
      <string name="all_items_label">Список усіх предметів:</string>
     <string name="edit_name">Назва</string>
     <string name="edit_location">Розміщення</string>
@@ -14,7 +14,7 @@
       <string name="cancel">Відмінити</string>
       <string name="new_item_label">Введіть інформацію про предмет:</string>
       <string name="edit_item_label">Редагувати інформацію про предмет</string>
-      <string name="server">http://slaytmc.esy.es/</string>
+      <string name="server">Сервер</string>
       <string name="add_photo_to_item">Фото</string>
       <string name="btn_choose_img">Виберіть зображення</string>
       <string name="btn_upload_img">Натисність щоб завантажити файл</string>
@@ -38,6 +38,15 @@
       <string name="clear_btn">Очистити</string>
       <string name="password">Пароль</string>
       <string name="login">Логін</string>
+      <string name="show_images">Показати зображення</string>
+      <string name="hello">Ласкаво просимо до додатку обліку ТМЦ</string>
+      <string name="settings_label">Налаштування</string>
+      <string name="admin_label">Увійти як адміністратор</string>
+      <string name="get_info_by_qr">Отримати інформацію про предмет</string>
+      <string name="admin_func_label">Адміністративні функції:</string>
+      <string name="image_manage_label">Натисніть щоб видалити зображення</string>
+      <string name="add_category_btn">Додати нову категорію</string>
+      <string name="upload_image_label">Завантаження зображення</string>
      
   
 </resources>

@@ -6,18 +6,18 @@ require 'db_connect.php';
  
 $db = new DB_CONNECT();
  
-$result = mysql_query("SELECT *FROM items") or die(mysql_error());
-
+$result = mysql_query("SELECT *FROM category") or die(mysql_error());
+ 
 if (mysql_num_rows($result) > 0) {
-    $response["items"] = array();
+    $response["category"] = array();
  
     while ($row = mysql_fetch_array($result)) {
-        $product = array();
-        $product["id"] = $row["id"];
-        $product["name"] = $row["name"];
+        $category = array();
+        $category["id"] = $row["id"];
+        $category["catname"] = $row["catname"];
   
  
-        array_push($response["items"], $product);
+        array_push($response["category"], $category);
     }
     $response["success"] = 1;
  

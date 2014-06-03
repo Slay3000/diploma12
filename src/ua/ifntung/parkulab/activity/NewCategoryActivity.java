@@ -21,78 +21,77 @@ import java.util.List;
 
 public class NewCategoryActivity extends Activity {
 
-    private ProgressDialog pDialog;
+	private ProgressDialog pDialog;
 
-    JSONParser jsonParser = new JSONParser();
-    EditText inputCategoryName;
+	JSONParser jsonParser = new JSONParser();
+	EditText inputCategoryName;
+	String server;
+	private static String url_create_category = "create_category.php";
 
-    private static String url_create_category = "http://slaytmc.esy.es/create_category.php";
+	private static final String TAG_SUCCESS = "success";
 
-    private static final String TAG_SUCCESS = "success";
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.add_category);
+		server = getIntent().getStringExtra("server");
+		inputCategoryName = (EditText) findViewById(R.id.categoryName);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_category);
+		Button btnCreateCategory = (Button) findViewById(R.id.btnSaveCategory);
+		btnCreateCategory.setOnClickListener(new View.OnClickListener() {
 
-        inputCategoryName = (EditText) findViewById(R.id.categoryName);
-        
-       
+			@Override
+			public void onClick(View view) {
+				new CreateNewCategory().execute();
+			}
+		});
+	}
 
-        Button btnCreateCategory = (Button) findViewById(R.id.btnSaveCategory);
-        btnCreateCategory.setOnClickListener(new View.OnClickListener() {
+	class CreateNewCategory extends AsyncTask<String, String, String> {
 
-            @Override
-            public void onClick(View view) {
-                new CreateNewCategory().execute();
-            }
-        });
-    }
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pDialog = new ProgressDialog(NewCategoryActivity.this);
+			pDialog.setMessage("Додаємо предмет...");
+			pDialog.setIndeterminate(false);
+			pDialog.setCancelable(true);
+			pDialog.show();
+		}
 
-    class CreateNewCategory extends AsyncTask<String, String, String> {
+		protected String doInBackground(String... args) {
+			String catName = inputCategoryName.getText().toString();
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(NewCategoryActivity.this);
-            pDialog.setMessage("Додаємо предмет...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("catname", catName));
 
-        protected String doInBackground(String... args) {
-            String catName = inputCategoryName.getText().toString();
-           
-            
+			JSONObject json = jsonParser.makeHttpRequest(server
+					+ url_create_category, "POST", params);
 
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("catname", catName));
-           
-            JSONObject json = jsonParser.makeHttpRequest(url_create_category, "POST", params);
+			Log.d("Створюємо відповідь ", json.toString());
 
-            Log.d("Створюємо відповідь ", json.toString());
+			try {
+				int success = json.getInt(TAG_SUCCESS);
 
-            try {
-                int success = json.getInt(TAG_SUCCESS);
+				if (success == 1) {
+					Intent i = new Intent(getApplicationContext(),
+							AllCategoriesActivity.class);
+					i.putExtra("server", server);
+					startActivity(i);
 
-                if (success == 1) {
-                    Intent i = new Intent(getApplicationContext(), AllCategoriesActivity.class);
-                    startActivity(i);
+					finish();
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 
-                    finish();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+			return null;
+		}
 
-            return null;
-        }
+		protected void onPostExecute(String file_url) {
+			pDialog.dismiss();
+		}
 
-        protected void onPostExecute(String file_url) {
-            pDialog.dismiss();
-        }
-
-    }
+	}
 
 }

@@ -22,6 +22,7 @@ if (isset($_GET["id"])) {
             $item["location"] = $result["location"];
 			 $item["inumber"] = $result["inumber"];
             $item["description"] = $result["description"];
+			$item["catname"] = $result["catname"];
            
             
             $response["success"] = 1;

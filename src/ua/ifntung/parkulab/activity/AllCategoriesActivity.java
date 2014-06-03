@@ -37,9 +37,9 @@ public class AllCategoriesActivity extends ListActivity {
 
     ArrayList<HashMap<String, String>> categoriesList;
     Button addNewCategory;
-    private static String url_all_items = "http://slaytmc.esy.es/get_all_categories.php";
-    private static final String url_delete_item = "http://slaytmc.esy.es/delete_category.php";
-String pid;
+    private static String url_all_items = "get_all_categories.php";
+    private static final String url_delete_item = "delete_category.php";
+String pid,server;
 
     private static final String TAG_ID = "id";
     private static final String TAG_CATEGORY_NAME = "catname";
@@ -51,6 +51,7 @@ String pid;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_categories);
+        server=getIntent().getStringExtra("server");
         addNewCategory=(Button)findViewById(R.id.addNewCat);
         categoriesList = new ArrayList<HashMap<String, String>>();
 
@@ -75,34 +76,7 @@ String pid;
             	pid = ((TextView) findViewById(R.id.idC)).getText()
 		                    .toString();
 					new DeleteCategory().execute();
-/*
-   			  deleteDialog = new AlertDialog.Builder(
-   					getApplicationContext()).setTitle(R.string.dialog_title)
-   			
-   			.setPositiveButton(R.string.cancel, new AlertDialog.OnClickListener() {
-   				public void onClick(DialogInterface dialog, int which) {
-   					deleteDialog.cancel();
-   				}
-   			})
-   			.setNeutralButton(R.string.delete, new AlertDialog.OnClickListener() {
-   				public void onClick(DialogInterface dialog, int which) {
-   					pid = ((TextView) findViewById(R.id.idC)).getText()
-   		                    .toString();
-   					new DeleteCategory().execute();
-   				}
-   			})
-   			.setNegativeButton(R.string.category_name_label, new AlertDialog.OnClickListener(){
-   				public void onClick(DialogInterface dialog, int which) {
-   					
-   				}
-   			})
-   			.create();
-   			deleteDialog.show();
-   			
-   			
-   */
-
-            
+          
                 
             }
         });
@@ -115,6 +89,7 @@ String pid;
         if (resultCode == 100) {
             Intent intent = getIntent();
             finish();
+            intent.putExtra("server", server);
             startActivity(intent);
         }
 
@@ -135,7 +110,7 @@ String pid;
 
         protected String doInBackground(String... args) {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            JSONObject json = jsonParser.makeHttpRequest(url_all_items, "GET", params);
+            JSONObject json = jsonParser.makeHttpRequest(server+url_all_items, "GET", params);
 
             Log.d("Всі предмети: ", json.toString());
 
@@ -205,7 +180,7 @@ String pid;
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("id", pid));
 
-				JSONObject json = jsonParser.makeHttpRequest(url_delete_item,
+				JSONObject json = jsonParser.makeHttpRequest(server+url_delete_item,
 						"POST", params);
 
 				Log.d("Видаляємо предмет", json.toString());

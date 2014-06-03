@@ -14,9 +14,9 @@
           
           <Button
         android:id="@+id/addNewCat"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add New" />
+        android:text="@string/add_category_btn" />
         </LinearLayout>
   
 

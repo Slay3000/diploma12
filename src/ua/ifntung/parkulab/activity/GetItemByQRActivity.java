@@ -37,15 +37,15 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-public class GetItemByQR extends Activity {
-	private static String url_all_qr = "http://slaytmc.esy.es/get_all_qr.php";
+public class GetItemByQRActivity extends Activity {
+	private static String url_all_qr = "get_all_qr.php";
 	ProgressDialog pDialog;	
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_CODES = "codes";
 	private static final String TAG_QR = "qrcode";
 	JSONParser jsonParser = new JSONParser();
 	JSONArray codes = null;
-String res;
+String res,server;
 	private Camera mCamera;
 	private CameraPreview mPreview;
 	private Handler autoFocusHandler;
@@ -65,7 +65,7 @@ ArrayList<String> blist=new ArrayList<String>();
 	public void onCreate(Bundle savedInstanceState) {
 		new GetAvaliableQRCodes().execute();
 		super.onCreate(savedInstanceState);
-
+		 server=getIntent().getStringExtra("server");
 		setContentView(R.layout.get_item_by_qr);
 
 
@@ -79,7 +79,7 @@ ArrayList<String> blist=new ArrayList<String>();
 		scanner.setConfig(0, Config.X_DENSITY, 3);
 		scanner.setConfig(0, Config.Y_DENSITY, 3);
 
-		mPreview = new CameraPreview(GetItemByQR.this, mCamera, previewCb, autoFocusCB);
+		mPreview = new CameraPreview(GetItemByQRActivity.this, mCamera, previewCb, autoFocusCB);
 		FrameLayout preview = (FrameLayout) findViewById(R.id.cameraPreview);
 		preview.addView(mPreview);
 	
@@ -103,7 +103,7 @@ ArrayList<String> blist=new ArrayList<String>();
 
 				if (barcodeScanned) {
 					barcodeScanned = false;
-					scanText.setText("Scanning...");
+					scanText.setText("Скануємо...");
 					mCamera.setPreviewCallback(previewCb);
 					mCamera.startPreview();
 					previewing = true;
@@ -155,6 +155,7 @@ ArrayList<String> blist=new ArrayList<String>();
 				if (blist.contains(sym.getData().toString())){
 					Intent in = new Intent(getApplicationContext(), ShowItemActivity.class);
 	                in.putExtra("qrcode", sym.getData().toString());
+	                in.putExtra("server", server);
 	              startActivity(in);
 					 }
 				else
@@ -180,7 +181,7 @@ ArrayList<String> blist=new ArrayList<String>();
 	      @Override
 	        protected void onPreExecute() {
 	            super.onPreExecute();
-	            pDialog = new ProgressDialog(GetItemByQR.this);
+	            pDialog = new ProgressDialog(GetItemByQRActivity.this);
 	            pDialog.setMessage("Отримуємо усі наявні QR-коди...");
 	            pDialog.setIndeterminate(false);
 	            pDialog.setCancelable(false);
@@ -188,7 +189,7 @@ ArrayList<String> blist=new ArrayList<String>();
 	        }
 		protected String doInBackground(String... args) {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			JSONObject json = jsonParser.makeHttpRequest(url_all_qr, "GET",
+			JSONObject json = jsonParser.makeHttpRequest(server+url_all_qr, "GET",
 					params);
 
 			Log.d("Всі предмети: ", json.toString());

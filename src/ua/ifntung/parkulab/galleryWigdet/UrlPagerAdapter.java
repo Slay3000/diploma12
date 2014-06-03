@@ -19,7 +19,6 @@ package ua.ifntung.parkulab.galleryWigdet;
 
 import java.util.List;
 
-import ua.ifntung.parkulab.touchView.UrlTouchImageView;
 
 import android.content.Context;
 import android.view.ViewGroup;

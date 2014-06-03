@@ -36,9 +36,9 @@ public class NewItemActivity extends Activity {
 	JSONParser jsonParser = new JSONParser();
 	EditText inputName, inputLocation, inputDesc, inputINumber;
 	Spinner spinnerCategory;
-
-	private static String url_create_item = "http://slaytmc.esy.es/create_item.php";
-	private static String url_all_categories = "http://slaytmc.esy.es/get_all_categories.php";
+String server;
+	private static String url_create_item = "create_item.php";
+	private static String url_all_categories = "get_all_categories.php";
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_CATEGORIES = "category";
 	private static final String TAG_CATEGORY_NAME = "catname";
@@ -49,7 +49,7 @@ public class NewItemActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_item);
-
+		  server=getIntent().getStringExtra("server");
 		inputName = (EditText) findViewById(R.id.inputName);
 		spinnerCategory = (Spinner) findViewById(R.id.inputCategory);
 		inputLocation = (EditText) findViewById(R.id.inputLocation);
@@ -123,7 +123,7 @@ public class NewItemActivity extends Activity {
 				e1.printStackTrace();
 			}
 
-			JSONObject json = jsonParser.makeHttpRequest(url_create_item,
+			JSONObject json = jsonParser.makeHttpRequest(server+url_create_item,
 					"POST", params);
 
 			Log.d("Створюємо відповідь ", json.toString());
@@ -134,6 +134,7 @@ public class NewItemActivity extends Activity {
 				if (success == 1) {
 					Intent i = new Intent(getApplicationContext(),
 							AllItemsActivity.class);
+					i.putExtra("server",server);
 					startActivity(i);
 
 					finish();
@@ -156,7 +157,7 @@ public class NewItemActivity extends Activity {
 
 		protected ArrayList<String> doInBackground(String... args) {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			JSONObject json = jsonParser.makeHttpRequest(url_all_categories,
+			JSONObject json = jsonParser.makeHttpRequest(server+url_all_categories,
 					"GET", params);
 
 			Log.d("Всі предмети: ", json.toString());
